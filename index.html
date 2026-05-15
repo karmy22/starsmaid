@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Stars Maid Cleaning Services makes home cleaning simple with clear service levels, instant estimates, and secure booking."
+    />
+    <meta name="theme-color" content="#0f9d92" />
+    <title>Stars Maid Cleaning Services</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/icon-192.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Stars Maid Cleaning Services home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32">
+            <path d="M5 16.5 16 6l11 10.5" />
+            <path d="M9 15.5V27h14V15.5" />
+            <path d="M13 27v-7h6v7" />
+            <path d="M22.5 6.5v5" />
+            <path d="M6.5 10.5l3-3" />
+          </svg>
+        </span>
+        <span>Stars Maid Cleaning Services</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#booking">Booking</a>
+        <a href="#services">Services &amp; Pricing</a>
+      </nav>
+      <div class="header-actions">
+        <label class="header-search" aria-label="Search site">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+          <input type="search" placeholder="Search" />
+        </label>
+        <a class="icon-link" href="tel:14155550148" aria-label="Call Stars Maid">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7A2 2 0 0 1 22 16.9Z" />
+          </svg>
+        </a>
+        <a class="icon-link" href="sms:14155550148" aria-label="Text Stars Maid">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z" /><path d="M8 9h8" /><path d="M8 13h5" /></svg>
+        </a>
+        <a class="icon-link" href="mailto:hello@starsmaidcleaning.com" aria-label="Email Stars Maid">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+        </a>
+        <a class="button button-secondary account-gate-link header-account-link" href="#login">My Account</a>
+        <a class="button button-primary" href="#booking">Book a Cleaning</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <h1 id="hero-title">A Cleaner Home. More Time for You.</h1>
+          <p>
+            Professional, reliable cleaning tailored to your home and schedule.
+            Trusted by busy homeowners and families across your neighborhood.
+          </p>
+          <div class="hero-buttons">
+            <a class="button button-primary" href="#booking">
+              Book a Cleaning
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 2v4" />
+                <path d="M16 2v4" />
+                <path d="M3 10h18" />
+                <rect x="3" y="4" width="18" height="18" rx="2" />
+              </svg>
+            </a>
+            <a class="button button-secondary" href="#services">View Pricing</a>
+          </div>
+          <div class="trust-grid" aria-label="Stars Maid Cleaning Services promises">
+            <span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5" /></svg>
+              Background Checked Pros
+            </span>
+            <span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20A7 7 0 0 1 4 13c0-5 8-10 8-10s8 5 8 10a7 7 0 0 1-7 7Z" /><path d="M12 20c0-4 2-7 5-9" /></svg>
+              Eco-Friendly Products
+            </span>
+            <span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10v11" /><path d="M15 5.9 14 10h5.8a2 2 0 0 1 2 2.4l-1.4 7a2 2 0 0 1-2 1.6H7" /><path d="M7 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3" /></svg>
+              Satisfaction Guaranteed
+            </span>
+            <span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 3" /></svg>
+              On-Time Service
+            </span>
+          </div>
+          <div class="review-strip">
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <span>4.9/5 from 1,200+ reviews</span>
+            <span class="divider"></span>
+            <span>Licensed &amp; Insured</span>
+          </div>
+        </div>
+
+        <div class="hero-media" aria-hidden="true">
+          <img src="assets/hero-living-room.png" alt="" />
+        </div>
+      </section>
+
+      <section class="workflow-section" aria-labelledby="workflow-title">
+        <div class="section-copy">
+          <h2 id="workflow-title">How It Works</h2>
+          <p>Simple steps. Spotless results.</p>
+        </div>
+        <div class="steps">
+          <article>
+            <span>1</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4" /><path d="M16 2v4" /><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M3 10h18" /></svg>
+            <h3>Book Online</h3>
+            <p>Choose your plan, date, and time.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.9" /><path d="M16 3.1a4 4 0 0 1 0 7.8" /></svg>
+            <h3>We Clean</h3>
+            <p>Our pros arrive on time and get to work.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" /><path d="m9 12 2 2 4-4" /></svg>
+            <h3>You Relax</h3>
+            <p>Enjoy your clean, happy home.</p>
+          </article>
+          <article>
+            <span>4</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 3.1 6.3L22 9.3l-5 4.9 1.2 6.8L12 17.8 5.8 21 7 14.2l-5-4.9 6.9-1Z" /></svg>
+            <h3>Love It</h3>
+            <p>Satisfaction guaranteed.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="about-section" aria-labelledby="about-title">
+        <div class="about-hero-copy">
+          <h2 id="about-title">About Stars Maid</h2>
+          <p>
+            Stars Maid Cleaning Services was built for busy homes that need
+            reliable help without complicated scheduling. We focus on clear
+            pricing, trusted cleaners, and a calm booking experience from the
+            first estimate to the final walkthrough.
+          </p>
+          <a class="button button-primary" href="#services">Explore Services</a>
+        </div>
+        <div class="about-points">
+          <article>
+            <strong>Trust First</strong>
+            <span>Background-checked pros, clear communication, and service notes for every visit.</span>
+          </article>
+          <article>
+            <strong>Flexible Cleaning</strong>
+            <span>One-time, deep, move-out, recurring, and custom add-on cleaning plans.</span>
+          </article>
+          <article>
+            <strong>Easy to Manage</strong>
+            <span>Customers can book, view balances, and manage account details from the app.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="review-section" id="reviews" aria-labelledby="reviews-title">
+        <div>
+          <h2 id="reviews-title">People Book Again Because It Feels Easy</h2>
+          <p>
+            Clear plans reduce decision fatigue. Visible estimates create trust.
+            A calm design helps visitors feel in control before they ever call.
+          </p>
+        </div>
+        <blockquote>
+          “The estimate was clear, the team arrived right on time, and the house
+          felt reset without me needing to manage every detail.”
+          <cite>Maria L., recurring Stars Maid customer</cite>
+        </blockquote>
+      </section>
+    </main>
+
+    <div class="mobile-book-bar" aria-label="Quick account actions">
+      <div class="mobile-account-panel">
+        <span>My Account</span>
+        <div class="mobile-account-links">
+          <a class="account-gate-link" href="#login">My Account</a>
+          <a href="#booking">Book Now</a>
+          <a href="mailto:hello@starsmaidcleaning.com">Contact Us</a>
+        </div>
+      </div>
+      <a class="button button-primary" href="#login">Sign In / Create</a>
+    </div>
+
+    <dialog id="confirmation-dialog">
+      <div class="dialog-content">
+        <button class="dialog-close" type="button" aria-label="Close confirmation">×</button>
+        <svg class="dialog-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+        <h2>You're on the list.</h2>
+        <p id="confirmation-copy">
+          Your Stars Maid estimate is ready. Next step: add contact and address details.
+        </p>
+        <button class="button button-primary button-wide" type="button" id="continue-button">
+          Continue Booking
+        </button>
+      </div>
+    </dialog>
+
+    <section class="app-shell" id="services" data-app-screen="services" aria-labelledby="services-title" hidden>
+      <div class="app-panel">
+        <div class="services-page-header">
+          <h2 id="services-title">General Pricing</h2>
+          <p>
+            Starting prices are organized from smallest to largest by home type.
+            Every visit includes reliable cleaning basics, with add-ons and
+            packing help available for deeper detail work, move prep, and custom requests.
+          </p>
+        </div>
+        <div class="pricing-sections">
+          <section class="pricing-group" aria-labelledby="apartment-pricing">
+            <h3 id="apartment-pricing">Apartments</h3>
+            <div class="pricing-table">
+              <article><span>Small Apartment</span><strong>Standard Clean</strong><p>Studio or 1 bedroom. Kitchen, bathroom, dusting, floors, trash, and light tidy.</p><b>From $109*</b></article>
+              <article><span>Medium Apartment</span><strong>Standard Clean</strong><p>2 bedrooms or larger apartment layout with routine kitchen, bath, living, and floor care.</p><b>From $129*</b></article>
+              <article><span>Large Apartment</span><strong>Deep or Standard Clean</strong><p>Large apartment or high-detail visit with extra room time and more surface detail.</p><b>From $169*</b></article>
+            </div>
+          </section>
+          <section class="pricing-group" aria-labelledby="townhouse-pricing">
+            <h3 id="townhouse-pricing">Town Houses</h3>
+            <div class="pricing-table">
+              <article><span>Small Townhome</span><strong>Standard Clean</strong><p>Compact multi-level home with kitchen, bathrooms, bedrooms, stairs, and living areas.</p><b>From $149*</b></article>
+              <article><span>Medium Townhome</span><strong>Standard or Deep Clean</strong><p>More bedrooms, stairs, and bathrooms with extra time for floors and high-touch areas.</p><b>From $189*</b></article>
+              <article><span>Large Townhome</span><strong>Deep Clean</strong><p>Detailed service for larger layouts, buildup, baseboards, fixtures, and extra rooms.</p><b>From $239*</b></article>
+            </div>
+          </section>
+          <section class="pricing-group" aria-labelledby="house-pricing">
+            <h3 id="house-pricing">Houses</h3>
+            <div class="pricing-table">
+              <article><span>Small House</span><strong>Standard Clean</strong><p>Routine full-home cleaning for smaller houses with kitchen, baths, bedrooms, and floors.</p><b>From $169*</b></article>
+              <article><span>Medium House</span><strong>Standard or Deep Clean</strong><p>Full-home service for average houses with more rooms, bathrooms, and detail time.</p><b>From $229*</b></article>
+              <article><span>Large House</span><strong>Deep or Move-Out Clean</strong><p>Large-home service, move prep, heavy detail work, or service with multiple add-ons.</p><b>From $299*</b></article>
+            </div>
+          </section>
+        </div>
+        <section class="add-ons-panel" aria-labelledby="addons-title">
+          <div>
+            <h3 id="addons-title">Add-Ons</h3>
+            <p>Add-ons can be selected during consultation or added to a custom quote.</p>
+          </div>
+          <div class="add-on-grid">
+            <article><strong>Inside fridge</strong><span>From $25</span><p>Empty-shelf wipe-down and interior detail.</p></article>
+            <article><strong>Inside oven</strong><span>From $35</span><p>Interior oven cleaning for buildup and residue.</p></article>
+            <article><strong>Interior windows</strong><span>From $8/window</span><p>Interior glass and sill wipe-down.</p></article>
+            <article><strong>Cabinet interiors</strong><span>From $45</span><p>Inside cabinet wipe-down when emptied.</p></article>
+            <article><strong>Laundry</strong><span>From $20/load</span><p>Wash, dry, and fold service by load.</p></article>
+            <article><strong>Bedsheets</strong><span>From $12/bed</span><p>Change linens when clean sheets are provided.</p></article>
+            <article><strong>Extra bathroom</strong><span>From $25</span><p>Additional bathroom beyond selected package.</p></article>
+            <article><strong>Pet hair detail</strong><span>From $35</span><p>Extra vacuuming and surface work for pet hair.</p></article>
+            <article><strong>Packing help</strong><span>Quote after consult</span><p>Organizing and packing items into boxes for a move. Stars Maid does not transport items or move belongings to a new home.</p></article>
+          </div>
+        </section>
+        <p class="pricing-disclaimer">
+          *Pricing may change based on home size, number of rooms, number of bathrooms,
+          service condition, add-ons, packing needs, recurring frequency, travel, and custom requests.
+          Final pricing is confirmed before service. Admins will be able to update service
+          names, descriptions, base prices, add-ons, packing services, and sale pricing after Firebase is connected.
+        </p>
+      </div>
+    </section>
+
+    <section class="app-shell" id="consultation" data-app-screen="consultation" aria-labelledby="consult-page-title" hidden>
+      <div class="app-dashboard booking-dashboard">
+        <aside class="app-sidebar">
+          <strong>Consultation</strong>
+          <a href="#consultation">Appointment</a>
+          <a href="#services">Pricing</a>
+          <a href="#login">Account</a>
+        </aside>
+        <div class="dashboard-main">
+          <div class="dashboard-header">
+            <div>
+              <h2 id="consult-page-title">Schedule a Cleaning Consultation</h2>
+              <p>
+                Book a $50 consultation to plan scheduled cleaning, recurring discounts,
+                bundles, add-ons, and packing support for your home.
+              </p>
+            </div>
+            <span class="permission-badge">$50 fee</span>
+          </div>
+          <form class="consult-booking-card" id="consultation-form">
+            <div class="booking-layout">
+              <article class="dashboard-card calendar-card">
+                <span>Consult Date</span>
+                <div class="booking-calendar" aria-label="Consultation calendar">
+                  <button type="button">Mon<br />3</button>
+                  <button type="button">Tue<br />4</button>
+                  <button type="button" class="is-selected">Wed<br />5</button>
+                  <button type="button">Thu<br />6</button>
+                  <button type="button">Fri<br />7</button>
+                  <button type="button">Sat<br />8</button>
+                  <button type="button">Sun<br />9</button>
+                </div>
+              </article>
+              <article class="dashboard-card booking-summary-card">
+                <span>Consult Details</span>
+                <strong>$50 scheduled cleaning consultation</strong>
+                <p>Use this for weekly, biweekly, monthly, add-on bundles, packing help, or custom service pricing.</p>
+                <label class="field">
+                  <span>Cleaning Frequency</span>
+                  <select id="clean-frequency" name="cleanFrequency">
+                    <option>Weekly</option>
+                    <option selected>Biweekly</option>
+                    <option>Monthly</option>
+                    <option>One-time custom quote</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Best Contact Method</span>
+                  <select id="contact-method" name="contactMethod">
+                    <option selected>Text me</option>
+                    <option>Call me</option>
+                    <option>Email me</option>
+                  </select>
+                </label>
+                <button class="button button-primary button-wide" type="submit">
+                  Book $50 Consultation
+                </button>
+                <p id="consultation-message" class="consultation-message" aria-live="polite"></p>
+              </article>
+            </div>
+          </form>
+          <section class="booking-confirmation-panel" id="booking-confirmation-panel" aria-labelledby="booking-confirmation-title" hidden>
+            <div class="confirmation-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></svg>
+            </div>
+            <div>
+              <span class="permission-badge">Request saved</span>
+              <h3 id="booking-confirmation-title">Your appointment draft is ready</h3>
+              <p id="booking-confirmation-copy">
+                Management will review your request. Sign in or create an account to finish private address details and payment setup.
+              </p>
+            </div>
+            <div class="confirmation-summary">
+              <article>
+                <span>Service</span>
+                <strong id="confirmation-service">Consultation</strong>
+              </article>
+              <article>
+                <span>Date &amp; Time</span>
+                <strong id="confirmation-schedule">Date pending</strong>
+              </article>
+              <article>
+                <span>ZIP Code</span>
+                <strong id="confirmation-zip">Pending</strong>
+              </article>
+              <article>
+                <span>Payment Step</span>
+                <strong id="confirmation-payment">$50 consult fee</strong>
+              </article>
+            </div>
+            <div class="confirmation-actions">
+              <a class="button button-primary" id="confirmation-account-link" href="#login">Sign In / Create Account</a>
+              <a class="button button-secondary" href="#services">Review Services</a>
+              <button class="button button-secondary" type="button" id="booking-start-over">Start Another Booking</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="app-shell" id="login" data-app-screen="login" aria-labelledby="login-title" hidden>
+      <div class="app-panel login-panel">
+        <div>
+          <h2 id="login-title">Log In to Your Stars Maid Account</h2>
+          <p>
+            Customers can book and manage cleanings. Employees can update availability.
+            Admins can manage approvals, sales, schedules, and pricing.
+          </p>
+        </div>
+        <form class="login-card" id="login-form">
+          <div class="auth-switch" aria-label="Authentication mode">
+            <button class="is-active" type="button">Sign In</button>
+            <button type="button">Sign Up</button>
+          </div>
+          <label class="field">
+            <span>Email</span>
+            <input id="login-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" />
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input id="login-password" name="password" type="password" placeholder="Firebase password later" autocomplete="current-password" />
+          </label>
+          <label class="field">
+            <span>Account Type</span>
+            <select id="login-role" name="role">
+              <option value="customer" selected>Customer</option>
+              <option value="employee">Employee</option>
+              <option value="admin">Admin</option>
+            </select>
+          </label>
+          <button class="button button-primary button-wide" type="submit">Continue</button>
+          <p class="login-note">
+            Firebase Auth will connect here next. Admin and employee accounts will require approval before permissions unlock.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <section class="app-shell" id="booking" data-app-screen="booking" aria-labelledby="booking-title" hidden>
+      <div class="app-dashboard booking-dashboard booking-intake-dashboard">
+        <div class="dashboard-main">
+          <div class="dashboard-header">
+            <div>
+              <h2 id="booking-title">Booking</h2>
+              <p>Start with your ZIP code, choose the service path, then schedule the consultation or service payment step.</p>
+            </div>
+            <span class="permission-badge">Wizard</span>
+          </div>
+          <form
+            id="booking-intake-form"
+            class="booking-station-form"
+            name="booking-intake"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+          >
+            <input type="hidden" name="form-name" value="booking-intake" />
+            <p class="hidden-field" aria-hidden="true">
+              <label>Do not fill this out: <input name="bot-field" tabindex="-1" /></label>
+            </p>
+            <div class="booking-progress" aria-label="Booking progress">
+              <span class="is-active" data-wizard-indicator="0">1. Area</span>
+              <span data-wizard-indicator="1">2. Service</span>
+              <span data-wizard-indicator="2">3. Details</span>
+              <span data-wizard-indicator="3">4. Schedule</span>
+              <span data-wizard-indicator="4">5. Payment</span>
+            </div>
+            <section class="booking-form-section wizard-panel is-active" data-wizard-panel="0" aria-labelledby="contact-title">
+              <div>
+                <span>Step 1</span>
+                <h3 id="contact-title">Contact &amp; Service Area</h3>
+                <p>ZIP code is checked first so customers know if Stars Maid serves their area.</p>
+              </div>
+              <div class="booking-form-grid">
+                <label class="field">
+                  <span>First Name</span>
+                  <input id="booking-first-name" name="firstName" type="text" placeholder="First name" required />
+                </label>
+                <label class="field">
+                  <span>Last Name</span>
+                  <input id="booking-last-name" name="lastName" type="text" placeholder="Last name" required />
+                </label>
+                <label class="field">
+                  <span>Email</span>
+                  <input id="booking-email" name="email" type="email" placeholder="you@example.com" required />
+                </label>
+                <label class="field">
+                  <span>Phone Number</span>
+                  <input id="booking-phone" name="phone" type="tel" placeholder="(415) 555-0100" required />
+                </label>
+                <label class="field">
+                  <span>ZIP Code</span>
+                  <input id="booking-zip" name="zip" type="text" inputmode="numeric" maxlength="5" placeholder="20001" required />
+                </label>
+                <label class="checkbox-field sms-consent">
+                  <input id="sms-consent" name="smsConsent" type="checkbox" />
+                  <span>I agree to receive text/SMS updates about my booking. Message and data rates may apply.</span>
+                </label>
+                <p id="zip-validation-message" class="zip-validation-message" aria-live="polite"></p>
+              </div>
+            </section>
+
+            <section class="booking-form-section wizard-panel" data-wizard-panel="1" aria-labelledby="service-type-title" hidden>
+              <div>
+                <span>Step 2</span>
+                <h3 id="service-type-title">Service Type</h3>
+                <p>Choose the path that best fits the work. Packing, move-out, project, event, and commercial jobs require consultation.</p>
+              </div>
+              <div class="service-type-grid" aria-label="Service type">
+                <label><input type="radio" name="serviceType" value="one-time-clean" checked /><span>One-Time Clean</span><small>Basic home cleaning with payment before confirmation.</small></label>
+                <label><input type="radio" name="serviceType" value="recurring-consult" /><span>Recurring Cleaning</span><small>Consult first, then schedule weekly or regular plans.</small></label>
+                <label><input type="radio" name="serviceType" value="move-prep" /><span>Move-Out / Move-Prep</span><small>Consult required for move-ready cleaning and packing needs.</small></label>
+                <label><input type="radio" name="serviceType" value="packing-help" /><span>Packing Help</span><small>Pack items into boxes. We do not transport belongings.</small></label>
+                <label><input type="radio" name="serviceType" value="construction-cleaning" /><span>Construction / Project Cleaning</span><small>Post-project cleaning, dust, debris detail, and special notes.</small></label>
+                <label><input type="radio" name="serviceType" value="event-commercial" /><span>Event or Commercial Contract</span><small>Business, event, and contract work for management review.</small></label>
+              </div>
+            </section>
+
+            <section class="booking-form-section wizard-panel" data-wizard-panel="2" aria-labelledby="home-details-title" hidden>
+              <div>
+                <span>Step 3</span>
+                <h3 id="home-details-title">Tell Us About Your Home</h3>
+                <p>These details help estimate timing, staffing, and the right service level for residential or commercial work.</p>
+              </div>
+              <div class="booking-form-grid">
+                <label class="field">
+                  <span>Property Type</span>
+                  <select id="property-type" name="propertyType">
+                    <option>Residential</option>
+                    <option>Commercial</option>
+                    <option>Event space</option>
+                    <option>Construction/project site</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>People in Home</span>
+                  <input id="home-people" name="people" type="number" min="0" placeholder="3" />
+                </label>
+                <label class="field">
+                  <span>Pets</span>
+                  <select id="home-pets" name="pets">
+                    <option>No pets</option>
+                    <option>Dog(s)</option>
+                    <option>Cat(s)</option>
+                    <option>Multiple pets</option>
+                  </select>
+                </label>
+                <label class="field">
+                <span>Rooms</span>
+                <input id="home-rooms" name="rooms" type="number" min="0" placeholder="6" />
+              </label>
+                <label class="field">
+                  <span>Beds</span>
+                  <input id="home-beds" name="beds" type="number" min="0" placeholder="3" />
+                </label>
+                <label class="field">
+                  <span>Baths</span>
+                  <input id="home-baths" name="baths" type="number" min="0" step="0.5" placeholder="2" />
+                </label>
+                <label class="field">
+                  <span>Basement</span>
+                  <select id="home-basement" name="basement">
+                    <option>No basement</option>
+                    <option>Unfinished basement</option>
+                    <option>Finished basement</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Yard</span>
+                  <select id="home-yard" name="yard">
+                    <option>No yard access needed</option>
+                    <option>Small yard</option>
+                    <option>Medium yard</option>
+                    <option>Large yard</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Demo / Heavy Cleaning</span>
+                  <select id="home-demo" name="demo">
+                    <option>No</option>
+                    <option>Light demo dust</option>
+                    <option>Post-renovation dust</option>
+                    <option>Heavy cleanout</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Square Feet</span>
+                  <input id="home-square-feet" name="squareFeet" type="number" min="0" placeholder="1800" />
+                </label>
+                <label class="field field-full">
+                  <span>Project / Service Notes</span>
+                  <textarea id="project-notes" name="projectNotes" rows="4" placeholder="Tell us about packing, construction dust, event cleanup, commercial needs, or anything special."></textarea>
+                </label>
+              </div>
+            </section>
+
+            <section class="booking-form-section wizard-panel" data-wizard-panel="3" aria-labelledby="consult-title" hidden>
+              <div>
+                <span>Step 4</span>
+                <h3 id="consult-title">In-Person Consultation</h3>
+                <p>Choose a date and exact arrival time. Real admin/employee availability will connect later.</p>
+              </div>
+              <div class="consult-scheduler">
+                <input type="hidden" id="booking-consult-date" name="consultDate" value="Wed 5" />
+                <div class="booking-calendar booking-consult-calendar" aria-label="In-person consultation calendar">
+                  <button class="is-selected" type="button" data-booking-date="Wed 5"><span>Wed</span><strong>5</strong></button>
+                  <button type="button" data-booking-date="Thu 6"><span>Thu</span><strong>6</strong></button>
+                  <button type="button" data-booking-date="Fri 7"><span>Fri</span><strong>7</strong></button>
+                  <button type="button" data-booking-date="Sat 8"><span>Sat</span><strong>8</strong></button>
+                  <button type="button" data-booking-date="Mon 10"><span>Mon</span><strong>10</strong></button>
+                  <button type="button" data-booking-date="Tue 11"><span>Tue</span><strong>11</strong></button>
+                  <button type="button" data-booking-date="Wed 12"><span>Wed</span><strong>12</strong></button>
+                </div>
+                <div class="booking-form-grid">
+                  <label class="field">
+                    <span>Arrival Time</span>
+                    <select id="booking-consult-window" name="consultWindow">
+                      <option>8:00 AM</option>
+                      <option>9:00 AM</option>
+                      <option>10:00 AM</option>
+                      <option>11:00 AM</option>
+                      <option>12:00 PM</option>
+                      <option>1:00 PM</option>
+                      <option>2:00 PM</option>
+                      <option>3:00 PM</option>
+                      <option>4:00 PM</option>
+                    </select>
+                  </label>
+                  <label class="field">
+                    <span>Consult Type</span>
+                    <select id="booking-consult-type" name="consultType">
+                      <option>Regular cleaning consultation</option>
+                      <option>Move-out or move-prep consultation</option>
+                      <option>Packing help consultation</option>
+                      <option>Custom cleaning consultation</option>
+                    </select>
+                  </label>
+                </div>
+                <p class="consult-note">$50 in-person consult fee can be applied to approved recurring or custom service plans.</p>
+              </div>
+            </section>
+            <section class="booking-form-section wizard-panel" data-wizard-panel="4" aria-labelledby="payment-title" hidden>
+              <div>
+                <span>Step 5</span>
+                <h3 id="payment-title">Payment &amp; Account</h3>
+                <p>Payment processing will use Stripe later. For now this creates a Netlify lead and account draft.</p>
+              </div>
+              <div class="payment-preview">
+                <strong id="booking-payment-title">$50 consultation fee</strong>
+                <p id="booking-payment-copy">$50 is non-refundable and can be applied toward the first approved service.</p>
+                <label class="checkbox-field">
+                  <input id="payment-acknowledge" name="paymentAcknowledge" type="checkbox" required />
+                  <span>I understand payment will be required to confirm this appointment when Stripe is connected.</span>
+                </label>
+                <button class="button button-primary button-wide" type="submit" id="booking-confirm">
+                  Create Account Draft
+                </button>
+                <p id="booking-submit-status" class="booking-submit-status" aria-live="polite"></p>
+              </div>
+            </section>
+            <div class="wizard-actions">
+              <button class="button button-secondary" type="button" id="booking-wizard-back" hidden>Back</button>
+              <button class="button button-primary" type="button" id="booking-wizard-next">Next</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="app-shell" id="customer" data-app-screen="customer" aria-labelledby="customer-title" hidden>
+      <div class="app-dashboard">
+        <aside class="app-sidebar">
+          <strong>Account</strong>
+          <button class="sidebar-tab-btn is-active" data-tab="overview">Overview</button>
+          <button class="sidebar-tab-btn" data-tab="bookings">My Bookings</button>
+          <button class="sidebar-tab-btn" data-tab="payment">Payments</button>
+          <button class="sidebar-tab-btn" data-tab="addresses">Addresses</button>
+          <button class="sidebar-tab-btn" data-tab="receipts">Receipts</button>
+          <button class="sidebar-tab-btn" data-tab="profile">Profile</button>
+          <a href="#booking" class="button button-secondary button-wide">New Booking</a>
+        </aside>
+        <div class="dashboard-main">
+          <div class="dashboard-header">
+            <div>
+              <h2 id="customer-title">My Account</h2>
+              <p>View bookings, manage payments, and update your profile.</p>
+            </div>
+          </div>
+          <div class="account-tab is-active" data-tab-panel="overview">
+            <article class="dashboard-card account-hero-card">
+              <span>Account Status</span>
+              <strong id="account-overview-title">Profile setup needed</strong>
+              <p id="account-overview-copy">Create or sign in to save addresses, review booking drafts, and prepare payment details.</p>
+            </article>
+            <article class="dashboard-card">
+              <span>Next Step</span>
+              <strong id="account-next-step">Finish private details</strong>
+              <p>Add the exact service address and payment method once Firebase and Stripe are connected.</p>
+            </article>
+            <article class="dashboard-card">
+              <span>Management Review</span>
+              <strong>24-48 hours</strong>
+              <p>Management reviews confirmed payments and sends final receipts within 24-48 hours.</p>
+            </article>
+            <article class="dashboard-card">
+              <span>Card On File</span>
+              <strong>Coming with Stripe</strong>
+              <p>Add-ons found during consult or service can be charged to the card on file after approval rules are built.</p>
+            </article>
+          </div>
+          <div class="account-tab" data-tab-panel="bookings" hidden>
+            <article class="dashboard-card">
+              <span>Next Booking</span>
+              <strong id="customer-next-booking">No confirmed booking yet</strong>
+              <p id="next-booking-details" class="booking-details"></p>
+              <div id="booking-status-info" hidden>
+                <p class="status-badge" id="booking-status"></p>
+              </div>
+            </article>
+            <article class="dashboard-card status-timeline-card">
+              <span>Status Timeline</span>
+              <ol class="status-timeline">
+                <li class="is-done">Request draft saved</li>
+                <li>Payment step pending</li>
+                <li>Management review</li>
+                <li>Confirmation sent</li>
+                <li>Final receipt within 24-48 hours</li>
+              </ol>
+            </article>
+            <article class="dashboard-card calendar-card">
+              <span>Calendar</span>
+              <div class="mini-calendar" aria-label="Customer calendar preview">
+                <b>Mon</b><b>Tue</b><b>Wed</b><b>Thu</b><b>Fri</b><b>Sat</b><b>Sun</b>
+                <span></span><span></span><span>1</span><span>2</span><span>3</span><span class="is-booked">4</span><span>5</span>
+                <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+              </div>
+            </article>
+          </div>
+          <div class="account-tab" data-tab-panel="payment" hidden>
+            <article class="dashboard-card payment-card">
+              <span>Amount Due</span>
+              <strong id="payment-amount-due">$0.00</strong>
+              <p id="payment-status-text">No pending payments</p>
+              <div id="payment-actions" hidden>
+                <div class="payment-status-badge" id="payment-status-badge"></div>
+                <button class="button button-primary button-wide" type="button" id="pay-now-btn" hidden>Pay Now</button>
+                <p class="payment-note">Payment processing coming soon with Stripe integration.</p>
+              </div>
+            </article>
+            <article class="dashboard-card">
+              <span>Saved Payment</span>
+              <strong>Payment method not added</strong>
+              <p>Users will add card or bank payment details here once Stripe/Firebase is connected.</p>
+            </article>
+            <article class="dashboard-card">
+              <span>Payment History</span>
+              <p id="payment-history-empty">No payment history yet.</p>
+            </article>
+          </div>
+          <div class="account-tab" data-tab-panel="addresses" hidden>
+            <article class="dashboard-card address-card">
+              <span>Primary Address</span>
+              <strong id="primary-address-title">No address saved</strong>
+              <p id="primary-address-copy">Residential and commercial addresses can be saved here after sign in.</p>
+            </article>
+            <article class="dashboard-card address-card">
+              <span>Additional Addresses</span>
+              <strong>Multiple locations supported</strong>
+              <p>Customers can keep separate residential, commercial, event, or project addresses.</p>
+            </article>
+          </div>
+          <div class="account-tab" data-tab-panel="receipts" hidden>
+            <article class="dashboard-card">
+              <span>Receipts</span>
+              <strong>No receipts yet</strong>
+              <p>After payment and management review, final receipts will be sent within 24-48 hours.</p>
+            </article>
+            <article class="dashboard-card">
+              <span>Confirmation Emails</span>
+              <strong>Admin reviewed</strong>
+              <p>Email confirmations will be sent after admin review, not immediately after the draft request.</p>
+            </article>
+          </div>
+          <div class="account-tab" data-tab-panel="profile" hidden>
+            <article class="dashboard-card">
+              <span>Contact Information</span>
+              <form id="profile-contact-form">
+                <label class="field">
+                  <span>Email</span>
+                  <input id="profile-email" name="email" type="email" placeholder="you@example.com" />
+                </label>
+                <label class="field">
+                  <span>Phone Number</span>
+                  <input id="profile-phone" name="phone" type="tel" placeholder="(415) 555-0100" />
+                </label>
+                <label class="field">
+                  <span>Street Address</span>
+                  <input id="profile-address" name="address" type="text" placeholder="123 Main St" />
+                </label>
+                <div class="field-row">
+                  <label class="field">
+                    <span>City</span>
+                    <input id="profile-city" name="city" type="text" placeholder="San Francisco" />
+                  </label>
+                  <label class="field">
+                    <span>State</span>
+                    <input id="profile-state" name="state" type="text" placeholder="CA" maxlength="2" />
+                  </label>
+                </div>
+                <label class="field">
+                  <span>ZIP Code</span>
+                  <input id="profile-zip" name="zip" type="text" placeholder="94105" />
+                </label>
+                <button class="button button-primary button-wide" type="submit">Save Profile</button>
+              </form>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="app-shell" id="employee" data-app-screen="employee" aria-labelledby="employee-title" hidden>
+      <div class="app-dashboard">
+        <aside class="app-sidebar">
+          <strong>Employee</strong>
+          <a href="#employee">Schedule</a>
+          <a href="#employee">Availability</a>
+          <a href="#employee">Payments</a>
+          <a href="#employee">Account</a>
+        </aside>
+        <div class="dashboard-main">
+          <div class="dashboard-header">
+            <div>
+              <h2 id="employee-title">Employee Workspace</h2>
+              <p>See assigned jobs, set availability, and track completed-job payments.</p>
+            </div>
+            <span class="permission-badge">Approval required</span>
+          </div>
+          <div class="dashboard-grid">
+            <article class="dashboard-card">
+              <span>Today</span>
+              <strong>Availability not set</strong>
+              <p>Employees will choose work windows once their account is approved.</p>
+            </article>
+            <article class="dashboard-card">
+              <span>Assigned Jobs</span>
+              <strong>0 active</strong>
+              <p>Admin-assigned bookings will appear here with customer notes.</p>
+            </article>
+            <article class="dashboard-card">
+              <span>Payments</span>
+              <strong>$0 pending</strong>
+              <p>Completed job payments and account balances will be tracked here.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="app-shell" id="admin" data-app-screen="admin" aria-labelledby="admin-title" hidden>
+      <div class="app-dashboard">
+        <aside class="app-sidebar">
+          <strong>Admin</strong>
+          <a href="#admin">Overview</a>
+          <a href="#admin">Approvals</a>
+          <a href="#admin">Sales</a>
+          <a href="#admin">Pricing</a>
+          <a href="#admin">Calendar</a>
+        </aside>
+        <div class="dashboard-main">
+          <div class="dashboard-header">
+            <div>
+              <h2 id="admin-title">Admin Control Center</h2>
+              <p>Approve users, manage schedules, create consult pricing, and turn sales on or off.</p>
+            </div>
+            <span class="permission-badge">Owner approval</span>
+          </div>
+          <div class="dashboard-grid">
+            <article class="dashboard-card">
+              <span>Access Requests</span>
+              <strong>3 pending</strong>
+              <p>Approve customer support, employee, or admin permissions before access is granted.</p>
+            </article>
+            <article class="dashboard-card">
+              <span>Site Sale</span>
+              <strong id="sale-state">Off</strong>
+              <p>Start or stop discounts on the public site.</p>
+              <button class="button button-secondary button-wide" type="button" id="sale-toggle">Turn Sale On</button>
+            </article>
+            <article class="dashboard-card">
+              <span>Consultation Pricing</span>
+              <strong>Custom quote builder</strong>
+              <p>Bundle add-ons, apply quantity discounts, and publish approved prices to customer accounts.</p>
+            </article>
+            <article class="dashboard-card transaction-card">
+              <span>Transactions</span>
+              <strong id="admin-transaction-title">No transaction selected</strong>
+              <p id="admin-transaction-copy">Customer balances will appear here for admin approval, finalization, and receipts.</p>
+              <div class="transaction-actions">
+                <button class="button button-secondary" type="button" id="approve-transaction">Approve</button>
+                <button class="button button-secondary" type="button" id="finalize-transaction">Finalize</button>
+                <button class="button button-primary" type="button" id="send-receipt">Send Receipt</button>
+              </div>
+            </article>
+            <article class="dashboard-card admin-editor-card">
+              <span>Pricing Editor</span>
+              <strong>Update services later</strong>
+              <label class="field">
+                <span>Service Name</span>
+                <input type="text" value="Standard Clean" />
+              </label>
+              <label class="field">
+                <span>Base Price</span>
+                <input type="text" value="$129" />
+              </label>
+              <p>Firebase will save admin updates to service names, prices, descriptions, add-ons, and disclaimers.</p>
+            </article>
+            <article class="dashboard-card calendar-card">
+              <span>Admin Calendar</span>
+              <div class="mini-calendar" aria-label="Admin calendar preview">
+                <b>Mon</b><b>Tue</b><b>Wed</b><b>Thu</b><b>Fri</b><b>Sat</b><b>Sun</b>
+                <span></span><span></span><span>1</span><span class="is-booked">2</span><span>3</span><span class="is-booked">4</span><span>5</span>
+                <span>6</span><span>7</span><span class="is-booked">8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "stars-maid-cleaning-services-pwa",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check app.js && node --check sw.js && node --check server.js"
+  }
+}
