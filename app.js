@@ -919,7 +919,27 @@ if (continueButton && dialog) {
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js");
+    navigator.serviceWorker.register("sw.js", { scope: './' })
+      .then((reg) => {
+        console.log('Service worker registered.', reg);
+        if (reg.waiting) {
+          console.log('Service worker waiting to activate.');
+        }
+        reg.addEventListener('updatefound', () => {
+          const newWorker = reg.installing;
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              console.log('New service worker installed and waiting.');
+            }
+          });
+        });
+      })
+      .catch((err) => console.warn('Service worker registration failed:', err));
+  });
+
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    console.log('Service worker controller changed — reloading');
+    window.location.reload();
   });
 }
 
