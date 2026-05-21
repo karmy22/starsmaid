@@ -70,6 +70,11 @@ const loginForm = document.querySelector("#login-form");
 const loginEmailInput = document.querySelector("#login-email");
 const loginPasswordInput = document.querySelector("#login-password");
 const loginRoleSelect = document.querySelector("#login-role");
+const loginContextTitle = document.querySelector("#login-context-title");
+const loginContextCopy = document.querySelector("#login-context-copy");
+const bookingLoginPrompt = document.querySelector("#booking-login-prompt");
+const bookingLoginButton = document.querySelector("#booking-login-button");
+const bookingGuestButton = document.querySelector("#booking-guest-button");
 const googleSignInButton = document.querySelector("#google-sign-in-btn");
 const signOutButtons = document.querySelectorAll(".sign-out-btn");
 const customerNextBooking = document.querySelector("#customer-next-booking");
@@ -168,7 +173,7 @@ let siteSettings = { showReviews: false };
 let adminSnapshot = null;
 let currentServiceSlug = "standard-clean";
 
-const firebaseConfig = window.starsMaidFirebaseConfig || {};
+let firebaseConfig = window.starsMaidFirebaseConfig || {};
 let firebaseAuthClient = null;
 
 const allowedServiceZips = new Set([
@@ -648,6 +653,10 @@ function routeTo(screen, options = {}) {
     updateBookingPage();
   }
 
+  if (screen === "login") {
+    renderLoginContext();
+  }
+
   if (screen === "services") {
     renderServiceOverview();
   }
@@ -831,8 +840,27 @@ function canUseEmployeeWorkspace() {
 function sendBookingToLogin() {
   const booking = getBookingSummary();
   localStorage.setItem("starsMaidPendingBooking", JSON.stringify(booking));
+  localStorage.setItem("starsMaidLoginIntent", "booking");
   window.location.hash = "login";
   routeTo("login");
+}
+
+function renderLoginContext() {
+  const intent = localStorage.getItem("starsMaidLoginIntent") || "account";
+
+  if (loginContextTitle) {
+    loginContextTitle.textContent = intent === "booking" ? "Sign In to Save This Booking" : "Log In to Your Stars Maid Account";
+  }
+
+  if (loginContextCopy) {
+    loginContextCopy.textContent = intent === "booking"
+      ? "Use this login when you want your booking, contact details, payments, and receipts saved to your customer account."
+      : "Use this account login to manage your profile, saved bookings, payment details, receipts, and admin or employee access.";
+  }
+
+  if (loginRoleSelect) {
+    loginRoleSelect.value = intent === "booking" ? "customer" : loginRoleSelect.value;
+  }
 }
 
 function updateBookingPage() {
@@ -841,7 +869,7 @@ function updateBookingPage() {
 
   if (bookingSummaryTitle && bookingSummaryCopy) {
     bookingSummaryTitle.textContent = `${booking.plan} - ${booking.price}`;
-    bookingSummaryCopy.textContent = `Booking station: ${booking.plan}. Start with ZIP validation, service type, property details, schedule, and payment preview.`;
+    bookingSummaryCopy.textContent = `Booking station: ${booking.plan}. Start with contact details, choose a basic cleaning option, then pick a service window.`;
   }
 }
 
@@ -888,8 +916,8 @@ function updatePaymentPreview() {
   const serviceType = getSelectedServiceType();
 
   if (serviceType === "one-time-clean") {
-    paymentTitle.textContent = "Service payment required";
-    paymentCopy.textContent = "One-time service payment will be collected before confirmation when Stripe is connected.";
+    paymentTitle.textContent = "Pay after service";
+    paymentCopy.textContent = "For one-time basic cleaning, payment is collected when services are received or finished.";
     return;
   }
 
@@ -905,9 +933,11 @@ function updatePaymentPreview() {
 
 function getServiceTypeLabel(value) {
   const labels = {
-    "one-time-clean": "One-Time Clean",
-    "recurring-cleaning": "Recurring Cleaning",
-    "deep-clean": "Deep Clean",
+    "one-time-clean": "Basic One-Time Clean",
+    "apartment-basic": "Basic Apartment Clean",
+    "townhouse-basic": "Basic Townhouse Clean",
+    "house-basic": "Basic House Clean",
+    "deep-clean": "Basic Deep Clean",
     "move-in-out": "Move-In / Move-Out",
     "rental-turnover": "Rental Turnover",
     "tenant-move-out": "Tenant Move-Out Rental Cleaning",
@@ -921,8 +951,8 @@ function getServiceTypeLabel(value) {
 }
 
 function getPaymentLabel(serviceType) {
-  if (serviceType === "one-time-clean") {
-    return "Service payment required";
+  if (["one-time-clean", "apartment-basic", "townhouse-basic", "house-basic", "deep-clean"].includes(serviceType)) {
+    return "Pay after service";
   }
 
   if (consultationOnlyServices.has(serviceType)) {
@@ -1052,7 +1082,21 @@ function updateAccountMenu() {
   });
 }
 
+function syncFirebaseConfig() {
+  if (Object.keys(firebaseConfig || {}).length > 0 && firebaseConfig.apiKey) {
+    return firebaseConfig;
+  }
+
+  if (window.firebase?.apps?.length) {
+    firebaseConfig = window.firebase.app().options || firebaseConfig;
+  }
+
+  return firebaseConfig;
+}
+
 function getFirebaseAuthClient() {
+  syncFirebaseConfig();
+
   if (!window.firebase || !firebaseConfig.apiKey) {
     return null;
   }
@@ -1164,6 +1208,8 @@ function openDialog(message) {
 }
 
 async function callFirebaseAuth(action, email, password) {
+  syncFirebaseConfig();
+
   if (!firebaseConfig.apiKey) {
     throw new Error("Firebase config is missing");
   }
@@ -1213,6 +1259,8 @@ async function signInWithGoogle() {
 }
 
 async function sendFirebasePasswordSetupEmail(email) {
+  syncFirebaseConfig();
+
   if (!firebaseConfig.apiKey) {
     throw new Error("Firebase config is missing");
   }
@@ -1633,7 +1681,9 @@ async function finishSignedInUser(firebaseUser, selectedRole) {
     openDialog("Your admin or employee access request was saved. A current admin must approve permissions before those tools unlock.");
   }
 
-  const destination = isApprovedAdmin() && selectedRole === "admin" ? "admin" : "customer";
+  const loginIntent = localStorage.getItem("starsMaidLoginIntent") || "account";
+  const destination = isApprovedAdmin() && selectedRole === "admin" && loginIntent !== "booking" ? "admin" : "customer";
+  localStorage.removeItem("starsMaidLoginIntent");
   updateBookingPage();
   window.location.hash = destination;
   routeTo(destination);
@@ -1763,6 +1813,8 @@ if (bookingStartOver) {
 
 accountGateLinks.forEach((link) => {
   link.addEventListener("click", (event) => {
+    localStorage.setItem("starsMaidLoginIntent", "account");
+
     if (!activeUserRole) {
       event.preventDefault();
       window.location.hash = "login";
@@ -1776,6 +1828,21 @@ accountGateLinks.forEach((link) => {
     routeTo("customer");
   });
 });
+
+if (bookingLoginButton) {
+  bookingLoginButton.addEventListener("click", () => {
+    localStorage.setItem("starsMaidLoginIntent", "booking");
+    window.location.hash = "login";
+    routeTo("login");
+  });
+}
+
+if (bookingGuestButton && bookingIntakeForm) {
+  bookingGuestButton.addEventListener("click", () => {
+    bookingIntakeForm.scrollIntoView({ behavior: "smooth", block: "start" });
+    bookingIntakeForm.querySelector("input, select, textarea")?.focus();
+  });
+}
 
 accountTabButtons.forEach((button) => {
   button.addEventListener("click", () => setAccountTab(button.dataset.tab));
@@ -2002,8 +2069,8 @@ if (bookingIntakeForm) {
       propertyType: formData.get("propertyType"),
       projectNotes: formData.get("projectNotes"),
       paymentAcknowledge: formData.get("paymentAcknowledge") === "on",
-      price: "Pending quote",
-      status: "Pending account details",
+      price: getPaymentLabel(formData.get("serviceType")),
+      status: "Booking request saved",
     };
 
     if (bookingSubmitStatus) {

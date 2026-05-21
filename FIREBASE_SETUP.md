@@ -17,28 +17,29 @@ const firebaseConfig = {
 };
 ```
 
-Do not copy the whole Firebase tutorial into the app. Copy only the values inside your own `firebaseConfig` object into `firebase-config.js`.
+Do not copy the whole Firebase tutorial into the app. The deployed site loads Firebase config from Firebase Hosting's reserved `/__/firebase/init.js` script so the public web key does not need to live in the repo.
 
-Replace the placeholder strings, for example:
-
-```js
-apiKey: "YOUR_API_KEY"
-```
-
-becomes:
+For local development only, create an ignored `firebase-config.local.js` file next to `firebase-config.js` and put your config there:
 
 ```js
-apiKey: "the-real-api-key-from-firebase"
+window.starsMaidFirebaseConfig = {
+  apiKey: "YOUR_FIREBASE_WEB_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.firebasestorage.app",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
 ```
 
-Keep the property names the same.
+Keep `firebase-config.local.js` out of Git. It is already listed in `.gitignore`.
 
 ## Firebase Console Setup
 
 1. Go to https://console.firebase.google.com.
 2. Create a project or open your existing Stars Maid project.
 3. Add a Web app.
-4. Copy the Web app config values into `firebase-config.js`.
+4. Deploy through Firebase Hosting so `/__/firebase/init.js` provides the Web app config in production.
 5. Enable Firestore Database.
 6. Enable Authentication, then turn on the Email/Password and Google sign-in providers.
 7. In Firestore Rules, deploy `firestore.rules`.

@@ -5,3 +5,5 @@ firebase-debug.log
 firestore-debug.log
 ui-debug.log
 *.local
+firebase-config.local.js
+public/firebase-config.local.js

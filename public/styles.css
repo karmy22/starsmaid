@@ -1246,6 +1246,36 @@ dialog::backdrop {
   margin-bottom: 0.65rem;
 }
 
+.booking-login-prompt {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.booking-login-prompt > div {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  padding: 1.2rem;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 14px 34px rgba(18, 40, 48, 0.07);
+}
+
+.booking-login-prompt h3 {
+  margin: 0;
+  color: #102a36;
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+
+.booking-login-prompt p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
 .services-page-header {
   position: relative;
   display: grid;
@@ -1831,22 +1861,29 @@ dialog::backdrop {
   display: grid;
   gap: 0.55rem;
   min-height: 178px;
+  align-content: start;
   box-shadow: 0 12px 30px rgba(18, 40, 48, 0.06);
 }
 
 .dashboard-card > span,
 .permission-badge {
-  width: max-content;
-  padding: 0.28rem 0.55rem;
+  display: inline-flex;
+  width: fit-content;
+  min-height: 30px;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.7rem;
   background: var(--accent-soft);
   border-radius: 999px;
   color: var(--accent-dark);
   font-size: 0.7rem;
   font-weight: 850;
+  line-height: 1;
   text-transform: uppercase;
 }
 
 .dashboard-card strong {
+  align-self: center;
   font-size: 1.25rem;
   line-height: 1.2;
 }
@@ -1861,6 +1898,43 @@ dialog::backdrop {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.account-overview-tab {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+}
+
+.account-overview-tab .account-hero-card,
+.account-overview-tab .dashboard-action-card {
+  min-height: 220px;
+}
+
+.account-bookings-tab {
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+}
+
+.account-payment-tab {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.75fr);
+}
+
+.account-receipts-tab {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+}
+
+.dashboard-action-card {
+  background:
+    linear-gradient(135deg, rgba(16, 42, 54, 0.96), rgba(8, 124, 116, 0.92));
+  color: #ffffff;
+}
+
+.dashboard-action-card > span {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+}
+
+.dashboard-action-card p {
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .account-tab[data-tab-panel="profile"] {
@@ -2558,6 +2632,10 @@ dialog::backdrop {
     grid-template-columns: 1fr;
   }
 
+  .booking-login-prompt {
+    grid-template-columns: 1fr;
+  }
+
   .service-photo-heading {
     align-items: start;
     flex-direction: column;
@@ -2778,6 +2856,13 @@ dialog::backdrop {
   }
 
   .account-tab {
+    grid-template-columns: 1fr;
+  }
+
+  .account-overview-tab,
+  .account-bookings-tab,
+  .account-payment-tab,
+  .account-receipts-tab {
     grid-template-columns: 1fr;
   }
 

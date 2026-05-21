@@ -14,8 +14,8 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <title>Stars Maid Cleaning Services</title>
     <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="preload" href="styles.css?v=28" as="style" />
-    <link rel="stylesheet" href="styles.css?v=28" />
+    <link rel="preload" href="styles.css?v=29" as="style" />
+    <link rel="stylesheet" href="styles.css?v=29" />
     <link rel="preload" href="assets/hero-living-room.png" as="image" />
     <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="assets/icon-192.svg" />
@@ -369,11 +369,9 @@
     <section class="app-shell" id="login" data-app-screen="login" aria-labelledby="login-title" hidden>
       <div class="app-panel login-panel">
         <div>
-          <h2 id="login-title">Log In to Your Stars Maid Account</h2>
-          <p>
-            Customers can book and manage cleanings. Employees can update availability.
-            Admins can manage approvals, sales, schedules, and pricing.
-          </p>
+          <span class="permission-badge">Account login</span>
+          <h2 id="login-title"><span id="login-context-title">Log In to Your Stars Maid Account</span></h2>
+          <p id="login-context-copy">Use this account login to manage your profile, saved bookings, payment details, receipts, and admin or employee access.</p>
         </div>
         <form class="login-card" id="login-form">
           <div class="auth-switch" aria-label="Authentication mode">
@@ -407,7 +405,7 @@
           </button>
           <button class="button button-primary button-wide" type="submit">Continue</button>
           <p class="login-note">
-            Firebase Auth protects accounts. Admin and employee accounts still require approval before permissions unlock.
+            This login is for saved accounts. Admin and employee accounts still require approval before permissions unlock.
           </p>
         </form>
       </div>
@@ -418,11 +416,25 @@
         <div class="dashboard-main">
           <div class="dashboard-header">
             <div>
-              <h2 id="booking-title">Booking</h2>
-              <p>Start with your ZIP code, choose the service path, then schedule the consultation or service payment step.</p>
+              <h2 id="booking-title">Book a Cleaning</h2>
+              <p>Choose account login for saved bookings, or use the one-time booking form for a basic cleaning request.</p>
             </div>
-            <span class="permission-badge">Wizard</span>
+            <span class="permission-badge">Simple booking</span>
           </div>
+          <section class="booking-login-prompt" id="booking-login-prompt" aria-label="Booking account options">
+            <div>
+              <span class="permission-badge">Returning customer</span>
+              <h3>Log in to reuse saved details</h3>
+              <p>Open the booking login to keep this request attached to your account, payments, receipts, and profile.</p>
+              <button class="button button-secondary" type="button" id="booking-login-button">Log In for Booking</button>
+            </div>
+            <div>
+              <span class="permission-badge">One-time clean</span>
+              <h3>Book without account setup</h3>
+              <p>Name, email, phone, basic service, schedule, and notes are enough to start. Payment is collected when service is received or finished.</p>
+              <button class="button button-primary" type="button" id="booking-guest-button">Start One-Time Booking</button>
+            </div>
+          </section>
           <form
             id="booking-intake-form"
             class="booking-station-form"
@@ -430,17 +442,17 @@
             method="POST"
           >
             <div class="booking-progress" aria-label="Booking progress">
-              <span class="is-active" data-wizard-indicator="0">1. Area</span>
+              <span class="is-active" data-wizard-indicator="0">1. Contact</span>
               <span data-wizard-indicator="1">2. Service</span>
-              <span data-wizard-indicator="2">3. Details</span>
+              <span data-wizard-indicator="2">3. Home</span>
               <span data-wizard-indicator="3">4. Schedule</span>
-              <span data-wizard-indicator="4">5. Payment</span>
+              <span data-wizard-indicator="4">5. Review</span>
             </div>
             <section class="booking-form-section wizard-panel is-active" data-wizard-panel="0" aria-labelledby="contact-title">
               <div>
                 <span>Step 1</span>
                 <h3 id="contact-title">Contact &amp; Service Area</h3>
-                <p>ZIP code is checked first so customers know if Stars Maid serves their area.</p>
+                <p>Basic contact details and service area check.</p>
               </div>
               <div class="booking-form-grid">
                 <label class="field">
@@ -474,28 +486,22 @@
             <section class="booking-form-section wizard-panel" data-wizard-panel="1" aria-labelledby="service-type-title" hidden>
               <div>
                 <span>Step 2</span>
-                <h3 id="service-type-title">Service Type</h3>
-                <p>Choose the path that best fits the work. Packing, move-out, project, event, and commercial jobs require consultation.</p>
+                <h3 id="service-type-title">Basic Service</h3>
+                <p>Simple cleaning options only. Add-ons and custom work can be discussed after the request is reviewed.</p>
               </div>
               <div class="service-type-grid" aria-label="Service type">
-                <label><input type="radio" name="serviceType" value="one-time-clean" checked /><span>One-Time Clean</span><small>Basic home cleaning with payment before confirmation.</small></label>
-                <label><input type="radio" name="serviceType" value="recurring-cleaning" /><span>Recurring Cleaning</span><small>Weekly, biweekly, or monthly home cleaning after account setup.</small></label>
-                <label><input type="radio" name="serviceType" value="deep-clean" /><span>Deep Clean</span><small>Reset-level detail cleaning for buildup, fixtures, baseboards, and add-ons.</small></label>
-                <label><input type="radio" name="serviceType" value="move-in-out" /><span>Move-In / Move-Out</span><small>Move-ready cleaning with condition review and optional inside add-ons.</small></label>
-                <label><input type="radio" name="serviceType" value="rental-turnover" /><span>Rental Turnover</span><small>Short-term rental reset between guests with beds, baths, kitchen, and restock notes.</small></label>
-                <label><input type="radio" name="serviceType" value="tenant-move-out" /><span>Tenant Move-Out Rental Cleaning</span><small>Landlord or property-manager move-out cleaning reviewed by condition.</small></label>
-                <label><input type="radio" name="serviceType" value="packing-organizing" /><span>Packing / Organizing Help</span><small>Pack, unpack, organize, or reset rooms. We do not transport belongings.</small></label>
-                <label><input type="radio" name="serviceType" value="trash-recycling" /><span>Apartment Trash / Recycling Pickup</span><small>Bagged apartment trash and recycling only, no hazardous waste or furniture.</small></label>
-                <label><input type="radio" name="serviceType" value="light-home-help" /><span>Light Home Help</span><small>Small home-help and high-reach tasks scoped by consultation.</small></label>
-                <label><input type="radio" name="serviceType" value="commercial-project" /><span>Commercial / Event / Project Cleaning</span><small>Business, event, construction, or project work for management review.</small></label>
+                <label><input type="radio" name="serviceType" value="one-time-clean" checked /><span>Basic One-Time Clean</span><small>Kitchen, bathrooms, dusting, floors, trash, and light tidy.</small></label>
+                <label><input type="radio" name="serviceType" value="apartment-basic" /><span>Apartment Basic Clean</span><small>Studio, one-bedroom, or larger apartment routine cleaning.</small></label>
+                <label><input type="radio" name="serviceType" value="townhouse-basic" /><span>Townhouse Basic Clean</span><small>Multi-level routine cleaning for stairs, baths, bedrooms, and living spaces.</small></label>
+                <label><input type="radio" name="serviceType" value="house-basic" /><span>House Basic Clean</span><small>Routine full-home cleaning for houses without add-ons.</small></label>
               </div>
             </section>
 
             <section class="booking-form-section wizard-panel" data-wizard-panel="2" aria-labelledby="home-details-title" hidden>
               <div>
                 <span>Step 3</span>
-                <h3 id="home-details-title">Tell Us About Your Home</h3>
-                <p>These details help estimate timing, staffing, and the right service level for residential or commercial work.</p>
+                <h3 id="home-details-title">Home Details</h3>
+                <p>Only the essentials needed to plan a basic cleaning.</p>
               </div>
               <div class="booking-form-grid">
                 <label class="field">
@@ -563,8 +569,8 @@
                   <input id="home-square-feet" name="squareFeet" type="number" min="0" placeholder="1800" />
                 </label>
                 <label class="field field-full">
-                  <span>Project / Service Notes</span>
-                  <textarea id="project-notes" name="projectNotes" rows="4" placeholder="Tell us about packing, construction dust, event cleanup, commercial needs, or anything special."></textarea>
+                  <span>Note</span>
+                  <textarea id="project-notes" name="projectNotes" rows="4" placeholder="Gate code, parking note, priorities, pets, or anything you want us to know."></textarea>
                 </label>
               </div>
             </section>
@@ -572,8 +578,8 @@
             <section class="booking-form-section wizard-panel" data-wizard-panel="3" aria-labelledby="consult-title" hidden>
               <div>
                 <span>Step 4</span>
-                <h3 id="consult-title">In-Person Consultation</h3>
-                <p>Choose a date and exact arrival time. Real admin/employee availability will connect later.</p>
+                <h3 id="consult-title">Preferred Service Time</h3>
+                <p>Choose a preferred day and arrival window. We will confirm availability before service.</p>
               </div>
               <div class="consult-scheduler">
                 <input type="hidden" id="booking-consult-date" name="consultDate" value="Wed 5" />
@@ -602,38 +608,33 @@
                     </select>
                   </label>
                   <label class="field">
-                    <span>Consult Type</span>
+                    <span>Visit Type</span>
                     <select id="booking-consult-type" name="consultType">
-                      <option>Regular cleaning consultation</option>
-                      <option>Deep clean consultation</option>
-                      <option>Move-in or move-out consultation</option>
-                      <option>Rental turnover consultation</option>
-                      <option>Tenant move-out rental consultation</option>
-                      <option>Packing or organizing consultation</option>
-                      <option>Apartment trash or recycling consultation</option>
-                      <option>Light home-help consultation</option>
-                      <option>Commercial, event, or project consultation</option>
+                      <option>One-time basic cleaning</option>
+                      <option>Apartment basic cleaning</option>
+                      <option>Townhouse basic cleaning</option>
+                      <option>House basic cleaning</option>
                     </select>
                   </label>
                 </div>
-                <p class="consult-note">$50 in-person consult fee can be applied to approved recurring or custom service plans.</p>
+                <p class="consult-note">Payment is collected when services are received or finished. No add-ons are included in this simple booking request.</p>
               </div>
             </section>
             <section class="booking-form-section wizard-panel" data-wizard-panel="4" aria-labelledby="payment-title" hidden>
               <div>
                 <span>Step 5</span>
-                <h3 id="payment-title">Payment &amp; Account</h3>
-                <p>Payment processing will use Stripe later. For now this creates a Firebase booking draft.</p>
+                <h3 id="payment-title">Review &amp; Submit</h3>
+                <p>This creates a booking request. Your details are saved securely when Firebase is connected.</p>
               </div>
               <div class="payment-preview">
-                <strong id="booking-payment-title">$50 consultation fee</strong>
-                <p id="booking-payment-copy">$50 is non-refundable and can be applied toward the first approved service.</p>
+                <strong id="booking-payment-title">Pay after service</strong>
+                <p id="booking-payment-copy">Payment is collected when services are received or finished.</p>
                 <label class="checkbox-field">
                   <input id="payment-acknowledge" name="paymentAcknowledge" type="checkbox" required />
-                  <span>I understand payment will be required to confirm this appointment when Stripe is connected.</span>
+                  <span>I understand Stars Maid will confirm availability and collect payment upon receiving or finishing services.</span>
                 </label>
                 <button class="button button-primary button-wide" type="submit" id="booking-confirm">
-                  Create Account Draft
+                  Submit Booking Request
                 </button>
                 <p id="booking-submit-status" class="booking-submit-status" aria-live="polite"></p>
               </div>
@@ -667,7 +668,7 @@
               <p>View bookings, manage payments, and update your profile.</p>
             </div>
           </div>
-          <div class="account-tab is-active" data-tab-panel="overview">
+          <div class="account-tab account-overview-tab is-active" data-tab-panel="overview">
             <article class="dashboard-card account-hero-card">
               <span>Account Status</span>
               <strong id="account-overview-title">Profile setup needed</strong>
@@ -688,8 +689,14 @@
               <strong>Coming with Stripe</strong>
               <p>Add-ons found during consult or service can be charged to the card on file after approval rules are built.</p>
             </article>
+            <article class="dashboard-card dashboard-action-card">
+              <span>Dashboard</span>
+              <strong>Everything in one place</strong>
+              <p>Use the side menu for bookings, payments, receipts, and profile details. Each page keeps its own saved information.</p>
+              <a href="#booking" class="button button-primary">Book Another Cleaning</a>
+            </article>
           </div>
-          <div class="account-tab" data-tab-panel="bookings" hidden>
+          <div class="account-tab account-bookings-tab" data-tab-panel="bookings" hidden>
             <article class="dashboard-card">
               <span>Next Booking</span>
               <strong id="customer-next-booking">No confirmed booking yet</strong>
@@ -717,7 +724,7 @@
               </div>
             </article>
           </div>
-          <div class="account-tab" data-tab-panel="payment" hidden>
+          <div class="account-tab account-payment-tab" data-tab-panel="payment" hidden>
             <article class="dashboard-card payment-card">
               <span>Amount Due</span>
               <strong id="payment-amount-due">$0.00</strong>
@@ -729,16 +736,16 @@
               </div>
             </article>
             <article class="dashboard-card">
-              <span>Saved Payment</span>
+              <span>Secure Payment Info</span>
               <strong>Payment method not added</strong>
-              <p>Users will add card or bank payment details here once Stripe/Firebase is connected.</p>
+              <p>Card or bank payment details will be saved here securely once Stripe/Firebase is connected.</p>
             </article>
             <article class="dashboard-card">
               <span>Payment History</span>
               <p id="payment-history-empty">No payment history yet.</p>
             </article>
           </div>
-          <div class="account-tab" data-tab-panel="addresses" hidden>
+          <div class="account-tab account-addresses-tab" data-tab-panel="addresses" hidden>
             <article class="dashboard-card address-card">
               <span>Primary Address</span>
               <strong id="primary-address-title">No address saved</strong>
@@ -750,19 +757,19 @@
               <p>Customers can keep separate residential, commercial, event, or project addresses.</p>
             </article>
           </div>
-          <div class="account-tab" data-tab-panel="receipts" hidden>
+          <div class="account-tab account-receipts-tab" data-tab-panel="receipts" hidden>
             <article class="dashboard-card">
               <span>Receipts</span>
               <strong>No receipts yet</strong>
               <p>After payment and management review, final receipts will be sent within 24-48 hours.</p>
             </article>
             <article class="dashboard-card">
-              <span>Confirmation Emails</span>
-              <strong>Admin reviewed</strong>
-              <p>Email confirmations will be sent after admin review, not immediately after the draft request.</p>
+              <span>Saved &amp; Secure</span>
+              <strong>Receipts stay with your account</strong>
+              <p>Final receipts and confirmation history will remain available from this page.</p>
             </article>
           </div>
-          <div class="account-tab" data-tab-panel="profile" hidden>
+          <div class="account-tab account-profile-tab" data-tab-panel="profile" hidden>
             <article class="dashboard-card">
               <span>Contact Information</span>
               <form id="profile-contact-form">
@@ -983,8 +990,10 @@
     </section>
 
     <script src="firebase-config.js" defer></script>
+    <script src="firebase-config.local.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-app-compat.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-auth-compat.js" defer></script>
+    <script src="/__/firebase/init.js" defer></script>
     <script src="app.js" defer></script>
   </body>
 </html>
