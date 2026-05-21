@@ -396,6 +396,15 @@
               <option value="admin">Admin</option>
             </select>
           </label>
+          <button class="button button-google button-wide" type="button" id="google-sign-in-btn">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21.8 12.2c0-.7-.1-1.3-.2-1.9H12v3.6h5.5a4.7 4.7 0 0 1-2 3.1v2.6h3.2c1.9-1.7 3.1-4.3 3.1-7.4Z" />
+              <path d="M12 22c2.7 0 5-0.9 6.7-2.4L15.5 17c-.9.6-2 .9-3.5.9a6 6 0 0 1-5.7-4.1H3v2.7A10 10 0 0 0 12 22Z" />
+              <path d="M6.3 13.8a6 6 0 0 1 0-3.6V7.5H3a10 10 0 0 0 0 9l3.3-2.7Z" />
+              <path d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.9-2.9A9.7 9.7 0 0 0 12 2 10 10 0 0 0 3 7.5l3.3 2.7A6 6 0 0 1 12 6.1Z" />
+            </svg>
+            Continue with Google
+          </button>
           <button class="button button-primary button-wide" type="submit">Continue</button>
           <p class="login-note">
             Firebase Auth protects accounts. Admin and employee accounts still require approval before permissions unlock.
@@ -649,6 +658,7 @@
           <button class="sidebar-tab-btn" data-tab="receipts">Receipts</button>
           <button class="sidebar-tab-btn" data-tab="profile">Profile</button>
           <a href="#booking" class="button button-secondary button-wide">New Booking</a>
+          <button class="button button-secondary button-wide sign-out-btn" type="button">Sign Out</button>
         </aside>
         <div class="dashboard-main">
           <div class="dashboard-header">
@@ -798,6 +808,7 @@
           <a href="#employee">Availability</a>
           <a href="#employee">Payments</a>
           <a href="#employee">Account</a>
+          <button class="button button-secondary button-wide sign-out-btn" type="button">Sign Out</button>
         </aside>
         <div class="dashboard-main">
           <div class="dashboard-header">
@@ -839,6 +850,7 @@
           <button class="admin-tab-btn" type="button" data-admin-tab="services">Services/Pricing</button>
           <button class="admin-tab-btn" type="button" data-admin-tab="bookings">Bookings</button>
           <button class="admin-tab-btn" type="button" data-admin-tab="transactions">Transactions</button>
+          <button class="button button-secondary button-wide sign-out-btn" type="button">Sign Out</button>
         </aside>
         <div class="dashboard-main">
           <div class="dashboard-header">
@@ -971,6 +983,8 @@
     </section>
 
     <script src="firebase-config.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-app-compat.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/12.13.0/firebase-auth-compat.js" defer></script>
     <script src="app.js" defer></script>
   </body>
 </html>

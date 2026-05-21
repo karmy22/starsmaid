@@ -70,6 +70,8 @@ const loginForm = document.querySelector("#login-form");
 const loginEmailInput = document.querySelector("#login-email");
 const loginPasswordInput = document.querySelector("#login-password");
 const loginRoleSelect = document.querySelector("#login-role");
+const googleSignInButton = document.querySelector("#google-sign-in-btn");
+const signOutButtons = document.querySelectorAll(".sign-out-btn");
 const customerNextBooking = document.querySelector("#customer-next-booking");
 const bookingSummaryTitle = document.querySelector("#booking-summary-title");
 const bookingSummaryCopy = document.querySelector("#booking-summary-copy");
@@ -167,6 +169,7 @@ let adminSnapshot = null;
 let currentServiceSlug = "standard-clean";
 
 const firebaseConfig = window.starsMaidFirebaseConfig || {};
+let firebaseAuthClient = null;
 
 const allowedServiceZips = new Set([
   "20001", "20004", "20005", "20006", "20007", "20008", "20009", "20036", "20037",
@@ -1049,6 +1052,21 @@ function updateAccountMenu() {
   });
 }
 
+function getFirebaseAuthClient() {
+  if (!window.firebase || !firebaseConfig.apiKey) {
+    return null;
+  }
+
+  if (!firebaseAuthClient) {
+    const app = window.firebase.apps?.length
+      ? window.firebase.app()
+      : window.firebase.initializeApp(firebaseConfig);
+    firebaseAuthClient = app.auth();
+  }
+
+  return firebaseAuthClient;
+}
+
 function updateCustomerAccount(booking) {
   if (!booking) {
     return;
@@ -1170,6 +1188,30 @@ async function callFirebaseAuth(action, email, password) {
   return result;
 }
 
+async function signInWithGoogle() {
+  const authClient = getFirebaseAuthClient();
+
+  if (!authClient || !window.firebase?.auth?.GoogleAuthProvider) {
+    throw new Error("Google sign-in is not ready. Check Firebase Auth setup and SDK loading.");
+  }
+
+  const provider = new window.firebase.auth.GoogleAuthProvider();
+  provider.addScope("email");
+  provider.addScope("profile");
+
+  const result = await authClient.signInWithPopup(provider);
+  const idToken = await result.user.getIdToken();
+
+  return {
+    localId: result.user.uid,
+    email: result.user.email,
+    displayName: result.user.displayName || "",
+    photoUrl: result.user.photoURL || "",
+    idToken,
+    refreshToken: result.user.refreshToken,
+  };
+}
+
 async function sendFirebasePasswordSetupEmail(email) {
   if (!firebaseConfig.apiKey) {
     throw new Error("Firebase config is missing");
@@ -1197,6 +1239,8 @@ function rememberFirebaseUser(user, role) {
   activeFirebaseUser = {
     uid: user.localId,
     email: user.email,
+    displayName: user.displayName || "",
+    photoUrl: user.photoUrl || "",
     idToken: user.idToken,
     refreshToken: user.refreshToken,
     role: safeRole,
@@ -1204,6 +1248,30 @@ function rememberFirebaseUser(user, role) {
   };
   activeUserRole = safeRole;
   localStorage.setItem("starsMaidFirebaseUser", JSON.stringify(activeFirebaseUser));
+}
+
+async function signOutCurrentUser() {
+  const authClient = getFirebaseAuthClient();
+
+  try {
+    await authClient?.signOut();
+  } catch (error) {
+    console.warn("Firebase sign-out failed:", error);
+  }
+
+  activeFirebaseUser = null;
+  activeUserRole = "";
+  adminSnapshot = null;
+  localStorage.removeItem("starsMaidFirebaseUser");
+  updateAccountMenu();
+
+  if (loginForm) {
+    loginForm.reset();
+  }
+
+  window.location.hash = "login";
+  routeTo("login");
+  openDialog("You have been signed out.");
 }
 
 async function saveFirebaseProfile(profile) {
@@ -1521,6 +1589,56 @@ async function approveAccessRequest(uid, role) {
   });
 }
 
+async function finishSignedInUser(firebaseUser, selectedRole) {
+  const accessRole = selectedRole === "customer" ? "customer" : "customer";
+  const pendingBooking = JSON.parse(localStorage.getItem("starsMaidPendingBooking") || "null");
+  let profileResult = null;
+
+  rememberFirebaseUser(firebaseUser, accessRole);
+  updateAccountMenu();
+
+  try {
+    profileResult = await saveFirebaseProfile({
+      email: firebaseUser.email,
+      role: accessRole,
+      requestedRole: selectedRole,
+      pendingBookingId: pendingBooking?.firebaseBookingId || "",
+    });
+  } catch (error) {
+    console.warn("Firebase profile sync failed:", error);
+    openDialog("Firebase sign-in worked. Profile syncing will finish after Cloud Functions are deployed.");
+  }
+
+  if (profileResult?.profile) {
+    activeFirebaseUser = {
+      ...activeFirebaseUser,
+      role: profileResult.profile.role || "customer",
+      roleStatus: profileResult.profile.roleStatus || "active",
+      requestedRole: profileResult.profile.requestedRole || selectedRole,
+    };
+    activeUserRole = activeFirebaseUser.role;
+    localStorage.setItem("starsMaidFirebaseUser", JSON.stringify(activeFirebaseUser));
+    updateAccountMenu();
+  }
+
+  if (pendingBooking && selectedRole === "customer") {
+    updateCustomerAccount(pendingBooking);
+  }
+
+  if (profileEmail && firebaseUser.email) {
+    profileEmail.value = firebaseUser.email;
+  }
+
+  if (selectedRole !== "customer" && !isApprovedAdmin()) {
+    openDialog("Your admin or employee access request was saved. A current admin must approve permissions before those tools unlock.");
+  }
+
+  const destination = isApprovedAdmin() && selectedRole === "admin" ? "admin" : "customer";
+  updateBookingPage();
+  window.location.hash = destination;
+  routeTo(destination);
+}
+
 // Plan buttons removed from home page
 // Will be added back in dedicated booking section
 
@@ -1663,6 +1781,10 @@ accountTabButtons.forEach((button) => {
   button.addEventListener("click", () => setAccountTab(button.dataset.tab));
 });
 
+signOutButtons.forEach((button) => {
+  button.addEventListener("click", signOutCurrentUser);
+});
+
 adminTabButtons.forEach((button) => {
   button.addEventListener("click", () => setAdminTab(button.dataset.adminTab));
 });
@@ -1797,64 +1919,38 @@ if (loginForm) {
   loginForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const selectedRole = loginRoleSelect.value;
-    const accessRole = selectedRole === "customer" ? "customer" : "customer";
     const email = loginEmailInput?.value.trim();
     const password = loginPasswordInput?.value;
-    const pendingBooking = JSON.parse(localStorage.getItem("starsMaidPendingBooking") || "null");
 
     if (!email || !password) {
       openDialog("Enter an email and password to continue.");
       return;
     }
 
-    let profileResult = null;
-
     try {
       const firebaseUser = await callFirebaseAuth(authMode, email, password);
-      rememberFirebaseUser(firebaseUser, accessRole);
-      updateAccountMenu();
+      await finishSignedInUser(firebaseUser, selectedRole);
     } catch (error) {
       const readableMessage = error.message.replaceAll("_", " ").toLowerCase();
       openDialog(`Firebase Auth could not continue: ${readableMessage}.`);
-      return;
     }
+  });
+}
+
+if (googleSignInButton) {
+  googleSignInButton.addEventListener("click", async () => {
+    const selectedRole = loginRoleSelect.value;
 
     try {
-      profileResult = await saveFirebaseProfile({
-        email,
-        role: accessRole,
-        requestedRole: selectedRole,
-        pendingBookingId: pendingBooking?.firebaseBookingId || "",
-      });
+      googleSignInButton.disabled = true;
+      const firebaseUser = await signInWithGoogle();
+      await finishSignedInUser(firebaseUser, selectedRole);
     } catch (error) {
-      console.warn("Firebase profile sync failed:", error);
-      openDialog("Firebase sign-in worked. Profile syncing will finish after Cloud Functions are deployed.");
+      const readableMessage = error.message.replaceAll("_", " ").toLowerCase();
+      openDialog(`Google sign-in could not continue: ${readableMessage}.`);
+    } finally {
+      googleSignInButton.disabled = false;
     }
-
-    if (profileResult?.profile) {
-      activeFirebaseUser = {
-        ...activeFirebaseUser,
-        role: profileResult.profile.role || "customer",
-        roleStatus: profileResult.profile.roleStatus || "active",
-        requestedRole: profileResult.profile.requestedRole || selectedRole,
-      };
-      activeUserRole = activeFirebaseUser.role;
-      localStorage.setItem("starsMaidFirebaseUser", JSON.stringify(activeFirebaseUser));
-      updateAccountMenu();
-    }
-
-    if (pendingBooking && selectedRole === "customer") {
-      updateCustomerAccount(pendingBooking);
-    }
-
-    if (selectedRole !== "customer" && !isApprovedAdmin()) {
-      openDialog("Your admin or employee access request was saved. A current admin must approve permissions before those tools unlock.");
-    }
-
-    const destination = isApprovedAdmin() && selectedRole === "admin" ? "admin" : "customer";
-    updateBookingPage();
-    window.location.hash = destination;
-    routeTo(destination);
   });
 }
 

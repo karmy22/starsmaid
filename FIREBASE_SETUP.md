@@ -40,7 +40,7 @@ Keep the property names the same.
 3. Add a Web app.
 4. Copy the Web app config values into `firebase-config.js`.
 5. Enable Firestore Database.
-6. Enable Authentication, then turn on the Email/Password sign-in provider.
+6. Enable Authentication, then turn on the Email/Password and Google sign-in providers.
 7. In Firestore Rules, deploy `firestore.rules`.
 
 ## Local Project Setup

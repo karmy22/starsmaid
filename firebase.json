@@ -91,6 +91,17 @@
     "singleProjectMode": true
   },
   "auth": {
-    "providers": {}
+    "providers": {
+      "emailPassword": true,
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "Stars Maid Cleaning Services",
+        "supportEmail": "hello@starsmaidcleaning.com",
+        "authorizedRedirectUris": [
+          "https://starsmaidservices.web.app",
+          "https://starsmaidservices.firebaseapp.com",
+          "https://star-maids.firebaseapp.com"
+        ]
+      }
+    }
   }
 }

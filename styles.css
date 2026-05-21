@@ -249,6 +249,20 @@ svg {
   color: var(--accent-dark);
 }
 
+.button-google {
+  background: #ffffff;
+  border-color: #d9e8e8;
+  color: #1f2f3d;
+  box-shadow: 0 10px 22px rgba(18, 40, 48, 0.08);
+}
+
+.button-google svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke-width: 1.8;
+}
+
 .button-wide {
   width: 100%;
 }
@@ -1226,6 +1240,10 @@ dialog::backdrop {
   background: #ffffff;
   color: var(--accent-dark);
   box-shadow: 0 8px 18px rgba(18, 40, 48, 0.08);
+}
+
+.login-card .button-google {
+  margin-bottom: 0.65rem;
 }
 
 .services-page-header {
