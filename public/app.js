@@ -75,6 +75,7 @@ const loginContextCopy = document.querySelector("#login-context-copy");
 const bookingLoginPrompt = document.querySelector("#booking-login-prompt");
 const bookingLoginButton = document.querySelector("#booking-login-button");
 const bookingGuestButton = document.querySelector("#booking-guest-button");
+const accountBookingWorkspace = document.querySelector("#account-booking-workspace");
 const googleSignInButton = document.querySelector("#google-sign-in-btn");
 const signOutButtons = document.querySelectorAll(".sign-out-btn");
 const customerNextBooking = document.querySelector("#customer-next-booking");
@@ -1082,6 +1083,24 @@ function updateAccountMenu() {
   });
 }
 
+function openAccountBookings() {
+  setAccountTab("bookings");
+  window.location.hash = "customer";
+  routeTo("customer");
+  requestAnimationFrame(() => {
+    accountBookingWorkspace?.scrollIntoView({ behavior: "smooth", block: "start" });
+    bookingIntakeForm?.querySelector("input, select, textarea")?.focus();
+  });
+}
+
+function mountBookingFormInAccount() {
+  if (!accountBookingWorkspace || !bookingIntakeForm) {
+    return;
+  }
+
+  accountBookingWorkspace.appendChild(bookingIntakeForm);
+}
+
 function syncFirebaseConfig() {
   if (Object.keys(firebaseConfig || {}).length > 0 && firebaseConfig.apiKey) {
     return firebaseConfig;
@@ -1685,6 +1704,9 @@ async function finishSignedInUser(firebaseUser, selectedRole) {
   const destination = isApprovedAdmin() && selectedRole === "admin" && loginIntent !== "booking" ? "admin" : "customer";
   localStorage.removeItem("starsMaidLoginIntent");
   updateBookingPage();
+  if (loginIntent === "booking") {
+    setAccountTab("bookings");
+  }
   window.location.hash = destination;
   routeTo(destination);
 }
@@ -1774,6 +1796,8 @@ authSwitchButtons.forEach((button) => {
   });
 });
 
+mountBookingFormInAccount();
+
 if (bookingWizardPanels.length > 0) {
   renderBookingWizard();
 }
@@ -1839,8 +1863,8 @@ if (bookingLoginButton) {
 
 if (bookingGuestButton && bookingIntakeForm) {
   bookingGuestButton.addEventListener("click", () => {
-    bookingIntakeForm.scrollIntoView({ behavior: "smooth", block: "start" });
-    bookingIntakeForm.querySelector("input, select, textarea")?.focus();
+    localStorage.setItem("starsMaidLoginIntent", "booking");
+    openAccountBookings();
   });
 }
 

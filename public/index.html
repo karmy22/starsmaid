@@ -417,7 +417,7 @@
           <div class="dashboard-header">
             <div>
               <h2 id="booking-title">Book a Cleaning</h2>
-              <p>Choose account login for saved bookings, or use the one-time booking form for a basic cleaning request.</p>
+              <p>Choose account login for saved bookings, or start a one-time booking from the account booking page.</p>
             </div>
             <span class="permission-badge">Simple booking</span>
           </div>
@@ -431,8 +431,8 @@
             <div>
               <span class="permission-badge">One-time clean</span>
               <h3>Book without account setup</h3>
-              <p>Name, email, phone, basic service, schedule, and notes are enough to start. Payment is collected when service is received or finished.</p>
-              <button class="button button-primary" type="button" id="booking-guest-button">Start One-Time Booking</button>
+              <p>Name, email, phone, basic service, schedule, and notes are enough to start. The form now lives under My Account, My Bookings.</p>
+              <button class="button button-primary" type="button" id="booking-guest-button">Open Account Booking Page</button>
             </div>
           </section>
           <form
@@ -658,7 +658,7 @@
           <button class="sidebar-tab-btn" data-tab="addresses">Addresses</button>
           <button class="sidebar-tab-btn" data-tab="receipts">Receipts</button>
           <button class="sidebar-tab-btn" data-tab="profile">Profile</button>
-          <a href="#booking" class="button button-secondary button-wide">New Booking</a>
+          <button class="sidebar-tab-btn" data-tab="bookings" type="button">New Booking</button>
           <button class="button button-secondary button-wide sign-out-btn" type="button">Sign Out</button>
         </aside>
         <div class="dashboard-main">
@@ -723,6 +723,7 @@
                 <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
               </div>
             </article>
+            <section class="account-booking-workspace" id="account-booking-workspace" aria-label="Create a booking"></section>
           </div>
           <div class="account-tab account-payment-tab" data-tab-panel="payment" hidden>
             <article class="dashboard-card payment-card">

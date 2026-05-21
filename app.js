@@ -1704,6 +1704,9 @@ async function finishSignedInUser(firebaseUser, selectedRole) {
   const destination = isApprovedAdmin() && selectedRole === "admin" && loginIntent !== "booking" ? "admin" : "customer";
   localStorage.removeItem("starsMaidLoginIntent");
   updateBookingPage();
+  if (loginIntent === "booking") {
+    setAccountTab("bookings");
+  }
   window.location.hash = destination;
   routeTo(destination);
 }
