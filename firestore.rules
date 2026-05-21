@@ -1,0 +1,50 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedInAs(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function validOwnProfile() {
+      return request.resource.data.keys().hasOnly([
+        "email",
+        "phone",
+        "address",
+        "city",
+        "state",
+        "zip",
+        "role",
+        "requestedRole",
+        "roleStatus",
+        "pendingBookingId",
+        "updatedAt"
+      ])
+      && request.resource.data.email is string
+      && request.resource.data.role == "customer"
+      && request.resource.data.requestedRole in ["customer", "employee", "admin"]
+      && request.resource.data.roleStatus in ["active", "pending"];
+    }
+
+    match /bookings/{bookingId} {
+      allow create: if false;
+      allow read, update, delete: if false;
+    }
+
+    match /users/{userId} {
+      allow read: if signedInAs(userId);
+      allow write: if false;
+    }
+
+    match /profiles/{profileId} {
+      allow read: if signedInAs(profileId);
+      allow create, update: if signedInAs(profileId) && validOwnProfile();
+      allow delete: if false;
+    }
+
+    match /siteSettings/{settingId} {
+      allow read: if settingId == "public";
+      allow write: if false;
+    }
+  }
+}

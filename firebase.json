@@ -1,0 +1,96 @@
+{
+  "$schema": "https://firebase.tools/schema/firebase-config.json",
+  "hosting": {
+    "site": "starsmaidservices",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "functions/**",
+      "package.json",
+      "package-lock.json",
+      "server.js",
+      "firebase-debug.log"
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "rewrites": [
+      {
+        "source": "/api/bookings",
+        "function": "createBooking"
+      },
+      {
+        "source": "/api/profiles",
+        "function": "saveProfile"
+      },
+      {
+        "source": "/api/site-settings",
+        "function": "getSiteSettings"
+      },
+      {
+        "source": "/api/me",
+        "function": "getMe"
+      },
+      {
+        "source": "/api/admin/dashboard",
+        "function": "getAdminDashboard"
+      },
+      {
+        "source": "/api/admin/site-settings",
+        "function": "updateSiteSettings"
+      },
+      {
+        "source": "/api/admin/employee-invites",
+        "function": "createEmployeeInvite"
+      },
+      {
+        "source": "/api/admin/approve-role",
+        "function": "approveRole"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint",
+        "npm --prefix \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ],
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "emulators": {
+    "auth": {
+      "port": 9099
+    },
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "ui": {
+      "enabled": true,
+      "port": 4000
+    },
+    "singleProjectMode": true
+  },
+  "auth": {
+    "providers": {}
+  }
+}
